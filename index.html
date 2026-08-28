@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SMM-NOW.com - Facebook & TikTok</title>
+    <title>LONG SMM KH - Login & Panel</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -11,216 +11,384 @@
         .navbar-brand { color: #0d6efd !important; font-weight: bold; }
         .card-stat { border: none; border-radius: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
         .btn-platform { border-radius: 8px; font-weight: 500; font-size: 14px; transition: all 0.2s; }
-        .btn-platform.active { background-color: #0d6efd; color: white; border-color: #0d6efd; }
+        .btn-platform.active { background-color: #0d6efd; color: white !important; border-color: #0d6efd; }
+        .btn-platform.active i { color: white !important; }
         .form-control, .form-select { border-radius: 8px; }
+        .auth-container { max-width: 400px; margin: 50px auto; }
     </style>
 </head>
 <body>
 
-    <!-- Header -->
-    <nav class="navbar navbar-light bg-white px-3 shadow-sm">
-        <div class="d-flex align-items-center">
-            <i class="fa-solid fa-bars fs-4 me-3"></i>
-            <a class="navbar-brand fs-4" href="#">SMM-NOW<span class="text-dark">.com</span></a>
-        </div>
-        <div>
-            <i class="fa-regular fa-moon fs-5 me-3" style="cursor: pointer;" onclick="alert('ប្ដូរពណ៌ (Dark Mode)')"></i>
-            <span class="badge bg-primary rounded-pill p-2"><i class="fa-solid fa-user"></i></span>
-        </div>
-    </nav>
-
-    <!-- Main Container -->
-    <div class="container py-3">
-
-        <!-- User Stats -->
-        <div class="row g-2 mb-2">
-            <div class="col-6">
-                <div class="card card-stat p-3 bg-white">
-                    <div class="d-flex align-items-center">
-                        <div class="bg-primary text-white p-2 rounded-3 me-2"><i class="fa-solid fa-user"></i></div>
-                        <div>
-                            <h6 class="mb-0 fw-bold">lysavelong5</h6>
-                            <small class="text-muted">ឈ្មោះអ្នកប្រើប្រាស់</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="card card-stat p-3 bg-white">
-                    <div class="d-flex align-items-center">
-                        <div class="bg-primary text-white p-2 rounded-3 me-2"><i class="fa-solid fa-wallet"></i></div>
-                        <div>
-                            <h6 class="mb-0 fw-bold" id="user-balance">$0.00</h6>
-                            <small class="text-muted">សមតុល្យទឹកប្រាក់</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row g-2 mb-3">
-            <div class="col-6">
-                <div class="card card-stat p-3 bg-white">
-                    <div class="d-flex align-items-center">
-                        <div class="bg-primary text-white p-2 rounded-3 me-2"><i class="fa-solid fa-chart-line"></i></div>
-                        <div>
-                            <h6 class="mb-0 fw-bold">$0.00</h6>
-                            <small class="text-muted">ចំណាយសរុប</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="card card-stat p-3 bg-white">
-                    <div class="d-flex align-items-center">
-                        <div class="bg-primary text-white p-2 rounded-3 me-2"><i class="fa-solid fa-box"></i></div>
-                        <div>
-                            <h6 class="mb-0 fw-bold" id="active-orders-count">0</h6>
-                            <small class="text-muted">ការបញ្ជាទិញសកម្ម</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Social Media Buttons (Only Facebook & TikTok) -->
-        <div class="row g-2 mb-3">
-            <div class="col-6">
-                <button class="btn btn-light w-100 btn-platform shadow-sm py-2 platform-btn active" data-platform="facebook" onclick="selectPlatform('facebook')">
-                    <i class="fa-brands fa-facebook text-primary"></i> Facebook
-                </button>
-            </div>
-            <div class="col-6">
-                <button class="btn btn-light w-100 btn-platform shadow-sm py-2 platform-btn" data-platform="tiktok" onclick="selectPlatform('tiktok')">
-                    <i class="fa-brands fa-tiktok"></i> TikTok
-                </button>
-            </div>
-        </div>
-
-        <!-- Order Tabs -->
-        <div class="row g-2 mb-3">
-            <div class="col-6"><button class="btn btn-primary w-100 btn-platform"><i class="fa-solid fa-cart-shopping"></i>បញ្ជាទិញថ្មី</button></div>
-            <div class="col-6"><button class="btn btn-light w-100 btn-platform border" onclick="alert('មិនមានទិន្នន័យចំណូលចិត្តទេ')"><i class="fa-solid fa-heart text-danger"></i>ចូលចិត្ត</button></div>
-        </div>
-
-        <!-- Order Form Card -->
-        <div class="card border-0 shadow-sm p-3 rounded-4">
-            <!-- Search -->
-            <div class="mb-3">
-                <div class="input-group">
-                    <span class="input-group-text bg-light border-end-0"><i class="fa-solid fa-magnifying-glass text-muted"></i></span>
-                    <input type="text" id="search-service" class="form-control bg-light border-start-0" placeholder="ស្វែងរកសេវាកម្ម..." onkeyup="filterServices()">
-                </div>
-            </div>
-
-            <!-- Category -->
-            <div class="mb-3">
-                <label class="form-label fw-bold small"><i class="fa-solid fa-table-cells text-primary"></i> ប្រភេទ (Category)</label>
-                <select class="form-select bg-light" id="category-select">
-                    <option id="cat-fb">Facebook - Followers [គណនីពិត - លឿន]</option>
-                    <option id="cat-tt" style="display:none;">TikTok - Views & Likes [សេវាកម្មរហ័ស]</option>
-                </select>
-            </div>
-
-            <!-- Service -->
-            <div class="mb-3">
-                <label class="form-label fw-bold small"><i class="fa-solid fa-bell-concierge text-primary"></i> សេវាកម្ម (Service)</label>
-                <select class="form-select bg-light" id="service-select">
-                    <option value="15">11328 - Facebook - Follower ទំព័រ ឬ ប្រវត្តិរូប</option>
-                </select>
-            </div>
-
-            <!-- Link -->
-            <div class="mb-3">
-                <label class="form-label fw-bold small"><i class="fa-solid fa-link text-primary"></i> តំណភ្ជាប់ (Link)</label>
-                <input type="text" id="order-link" class="form-control bg-light" placeholder="https://...">
-            </div>
-
-            <!-- Quantity -->
-            <div class="mb-2">
-                <label class="form-label fw-bold small"><i class="fa-solid fa-arrow-up-wide-short text-primary"></i> ចំនួន (Quantity)</label>
-                <div class="position-relative">
-                    <input type="number" id="order-qty" class="form-control bg-light pe-5" placeholder="100" oninput="calculateTotal()">
-                    <button class="btn btn-primary position-absolute top-50 end-0 translate-middle-y me-1 rounded-circle" style="width: 35px; height: 35px;" onclick="submitOrder()"><i class="fa-solid fa-paper-plane fs-6"></i></button>
-                </div>
-                <small class="text-muted mt-1 d-block">អប្បបរមា: 10 - អតិបរមា: 1,000,000</small>
-            </div>
+    <!-- ផ្នែកចូល និងចុះឈ្មោះ (Auth Section) -->
+    <div id="auth-section" class="container auth-container">
+        <div class="card border-0 shadow-sm p-4 rounded-4 bg-white">
+            <h3 class="text-center fw-bold text-primary mb-3">LONG SMM KH</h3>
+            <p class="text-center text-muted small mb-4" id="auth-subtitle">សូមចូលគណនីរបស់អ្នកដើម្បីបន្ត</p>
             
-            <div class="mt-2 text-end">
-                <span class="fw-bold text-primary" id="total-price">សរុប: $0.00</span>
+            <div class="mb-3" id="name-field" style="display:none;">
+                <label class="form-label fw-bold small">ឈ្មោះពេញ (Full Name)</label>
+                <input type="text" id="reg-name" class="form-control bg-light" placeholder="បញ្ចូលឈ្មោះរបស់អ្នក">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold small">ឈ្មោះអ្នកប្រើប្រាស់ (Username)</label>
+                <input type="text" id="auth-username" class="form-control bg-light" placeholder="ឧ. lysavelong5">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold small">ពាក្យសម្ងាត់ (Password)</label>
+                <input type="password" id="auth-password" class="form-control bg-light" placeholder="******">
+            </div>
+
+            <button id="auth-btn" class="btn btn-primary w-100 py-2 mb-3 fw-bold" onclick="handleAuth()">ចូលគណនី (Login)</button>
+            
+            <div class="text-center">
+                <small class="text-muted" id="auth-toggle-text">គ្មានគណនីមែនទេ? <a href="#" onclick="toggleAuthMode(event)" class="text-decoration-none fw-bold">បង្កើតគណនី</a></small>
             </div>
         </div>
+    </div>
 
+    <!-- ផ្នែកផ្ទាំងដើមរបស់ SMM Panel (Dashboard Section) -->
+    <div id="app-section" style="display:none;">
+        <!-- Header -->
+        <nav class="navbar navbar-light bg-white px-3 shadow-sm">
+            <div class="d-flex align-items-center">
+                <i class="fa-solid fa-bars fs-4 me-3"></i>
+                <a class="navbar-brand fs-4" href="#">LONG SMM<span class="text-dark"> KH</span></a>
+            </div>
+            <div>
+                <button class="btn btn-sm btn-outline-danger me-2" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> ចេញ</button>
+                <span class="badge bg-primary rounded-pill p-2"><i class="fa-solid fa-user"></i></span>
+            </div>
+        </nav>
+
+        <!-- Main Container -->
+        <div class="container py-3" style="max-width: 500px;">
+
+            <!-- User Stats Row 1 -->
+            <div class="row g-2 mb-2">
+                <div class="col-6">
+                    <div class="card card-stat p-3 bg-white">
+                        <div class="d-flex align-items-center">
+                            <div class="bg-primary text-white p-2 rounded-3 me-2"><i class="fa-solid fa-user"></i></div>
+                            <div>
+                                <h6 class="mb-0 fw-bold" id="display-username">User</h6>
+                                <small class="text-muted">Username</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card card-stat p-3 bg-white">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div>
+                                <h6 class="mb-0 fw-bold text-success" id="user-balance">$0.00</h6>
+                                <small class="text-muted">សមតុល្យ</small>
+                            </div>
+                            <button class="btn btn-sm btn-primary rounded-circle" onclick="openAddFundModal()" title="Add Fund"><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- User Stats Row 2 -->
+            <div class="row g-2 mb-3">
+                <div class="col-6">
+                    <div class="card card-stat p-3 bg-white">
+                        <div class="d-flex align-items-center">
+                            <div class="bg-primary text-white p-2 rounded-3 me-2"><i class="fa-solid fa-chart-line"></i></div>
+                            <div>
+                                <h6 class="mb-0 fw-bold" id="total-spent">$0.00</h6>
+                                <small class="text-muted">ចំណាយសរុប</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card card-stat p-3 bg-white">
+                        <div class="d-flex align-items-center">
+                            <div class="bg-primary text-white p-2 rounded-3 me-2"><i class="fa-solid fa-box"></i></div>
+                            <div>
+                                <h6 class="mb-0 fw-bold" id="active-orders-count">0</h6>
+                                <small class="text-muted">បញ្ជាទិញសកម្ម</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Platform Buttons: Facebook & TikTok -->
+            <div class="row g-2 mb-3">
+                <div class="col-6">
+                    <button id="btn-facebook" class="btn btn-light w-100 btn-platform shadow-sm py-2 active" onclick="selectPlatform('facebook')">
+                        <i class="fa-brands fa-facebook text-primary me-1"></i> Facebook
+                    </button>
+                </div>
+                <div class="col-6">
+                    <button id="btn-tiktok" class="btn btn-light w-100 btn-platform shadow-sm py-2" onclick="selectPlatform('tiktok')">
+                        <i class="fa-brands fa-tiktok text-dark me-1"></i> TikTok
+                    </button>
+                </div>
+            </div>
+
+            <!-- Action Tabs -->
+            <div class="row g-2 mb-3">
+                <div class="col-6"><button class="btn btn-primary w-100 btn-platform"><i class="fa-solid fa-cart-shopping me-1"></i> បញ្ជាទិញថ្មី</button></div>
+                <div class="col-6"><button class="btn btn-light w-100 btn-platform border" onclick="openAddFundModal()"><i class="fa-solid fa-wallet text-success me-1"></i> បញ្ចូលប្រាក់</button></div>
+            </div>
+
+            <!-- Order Form Card -->
+            <div class="card border-0 shadow-sm p-3 rounded-4 bg-white">
+                <div class="mb-3">
+                    <label class="form-label fw-bold small"><i class="fa-solid fa-table-cells text-primary me-1"></i> ប្រភេទសេវាកម្ម (Category)</label>
+                    <select class="form-select bg-light" id="category-select" onchange="loadServices()"></select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold small"><i class="fa-solid fa-bell-concierge text-primary me-1"></i> សេវាកម្ម (Service)</label>
+                    <select class="form-select bg-light" id="service-select" onchange="calculateTotal()"></select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold small"><i class="fa-solid fa-link text-primary me-1"></i> តំណភ្ជាប់ (Link)</label>
+                    <input type="text" id="order-link" class="form-control bg-light" placeholder="https://...">
+                </div>
+
+                <div class="mb-2">
+                    <label class="form-label fw-bold small"><i class="fa-solid fa-arrow-up-wide-short text-primary me-1"></i> ចំនួន (Quantity)</label>
+                    <div class="position-relative">
+                        <input type="number" id="order-qty" class="form-control bg-light pe-5" placeholder="1000" oninput="calculateTotal()">
+                        <button class="btn btn-primary position-absolute top-50 end-0 translate-middle-y me-1 rounded-circle d-flex align-items-center justify-content-center" style="width: 35px; height: 35px;" onclick="submitOrder()">
+                            <i class="fa-solid fa-paper-plane fs-6"></i>
+                        </button>
+                    </div>
+                    <small class="text-muted mt-1 d-block">អប្បបរមា: 100 - អតិបរមា: 1,000,000</small>
+                </div>
+                
+                <div class="mt-3 p-2 bg-light rounded text-end">
+                    <span class="text-muted small me-2">តម្លៃសរុប:</span>
+                    <span class="fw-bold text-primary fs-5" id="total-price">$0.00</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal បញ្ចូលប្រាក់ (Add Fund Modal) -->
+    <div class="modal fade" id="addFundModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-4 border-0 p-3">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title fw-bold"><i class="fa-solid fa-wallet text-success"></i> បញ្ចូលទឹកប្រាក់ (Add Fund)</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold">ជ្រើសរើសធនាគារ</label>
+                        <select class="form-select bg-light" id="bank-select">
+                            <option>ABA Bank - 000 111 222 (LONG SMM)</option>
+                            <option>ACLEDA Bank - 333 444 555 (LONG SMM)</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold">ទឹកប្រាក់ចង់បញ្ចូល ($)</label>
+                        <input type="number" id="fund-amount" class="form-control bg-light" placeholder="10">
+                    </div>
+                    <button class="btn btn-success w-100 fw-bold py-2" onclick="addFund()">បញ្ជាក់ការបញ្ចូលប្រាក់</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        let isRegisterMode = false;
+        let currentUser = null;
+        let balance = 0.00;
+        let totalSpentAmount = 0.00;
+        let activeOrdersCount = 0;
+
+        const platformData = {
+            facebook: {
+                categories: [
+                    { id: "fb-cat-1", name: "Facebook - Followers (អ្នកតាមដាន)", services: [{ id: 101, name: "101 - Facebook Profile/Page Followers", pricePer1k: 2.50 }, { id: 102, name: "102 - Facebook Page Likes", pricePer1k: 3.20 }] },
+                    { id: "fb-cat-2", name: "Facebook - Post Likes & Reactions", services: [{ id: 103, name: "103 - Facebook Post Likes", pricePer1k: 0.80 }] }
+                ]
+            },
+            tiktok: {
+                categories: [
+                    { id: "tt-cat-1", name: "TikTok - Followers (អ្នកតាមដាន)", services: [{ id: 201, name: "201 - TikTok Followers [គុណភាពខ្ពស់]", pricePer1k: 4.50 }] },
+                    { id: "tt-cat-2", name: "TikTok - Video Views (ការទស្សនា)", services: [{ id: 202, name: "202 - TikTok Video Views [លឿនបំផុត]", pricePer1k: 0.05 }] }
+                ]
+            }
+        };
+
         let currentPlatform = 'facebook';
-        let activeOrders = 0;
+
+        // ពិនិត្យមើលថាតើមាន User រក្សាទុកស្រាប់ឬអត់ពេលបើកវេបសាយ
+        window.onload = function() {
+            const savedUser = localStorage.getItem('long_smm_user');
+            const savedBalance = localStorage.getItem('long_smm_balance');
+            if (savedUser) {
+                currentUser = savedUser;
+                balance = savedBalance ? parseFloat(savedBalance) : 10.00;
+                showApp();
+            }
+        };
+
+        function toggleAuthMode(e) {
+            e.preventDefault();
+            isRegisterMode = !isRegisterMode;
+            document.getElementById('name-field').style.display = isRegisterMode ? 'block' : 'none';
+            document.getElementById('auth-subtitle').textContent = isRegisterMode ? 'បង្កើតគណនីថ្មីរបស់អ្នក' : 'សូមចូលគណនីរបស់អ្នកដើម្បីបន្ត';
+            document.getElementById('auth-btn').textContent = isRegisterMode ? 'ចុះឈ្មោះ (Register)' : 'ចូលគណនី (Login)';
+            document.getElementById('auth-toggle-text').innerHTML = isRegisterMode ? 
+                'មានគណនីរួចហើយ? <a href="#" onclick="toggleAuthMode(event)" class="text-decoration-none fw-bold">ចូលគណនី</a>' : 
+                'គ្មានគណនីមែនទេ? <a href="#" onclick="toggleAuthMode(event)" class="text-decoration-none fw-bold">បង្កើតគណនី</a>';
+        }
+
+        function handleAuth() {
+            const username = document.getElementById('auth-username').value.trim();
+            const password = document.getElementById('auth-password').value.trim();
+
+            if (!username || !password) {
+                alert('សូមបំពេញឈ្មោះ និងពាក្យសម្ងាត់ជាមុនសិន!');
+                return;
+            }
+
+            currentUser = username;
+            balance = 10.00; // ថែមជូនដើម 10$ ពេលបង្កើតគណនីថ្មី
+            localStorage.setItem('long_smm_user', currentUser);
+            localStorage.setItem('long_smm_balance', balance);
+            
+            showApp();
+        }
+
+        function showApp() {
+            document.getElementById('auth-section').style.display = 'none';
+            document.getElementById('app-section').style.display = 'block';
+            document.getElementById('display-username').textContent = currentUser;
+            updateUI();
+            selectPlatform('facebook');
+        }
+
+        function logout() {
+            localStorage.removeItem('long_smm_user');
+            localStorage.removeItem('long_smm_balance');
+            location.reload();
+        }
+
+        function updateUI() {
+            document.getElementById('user-balance').textContent = `$${balance.toFixed(2)}`;
+            document.getElementById('total-spent').textContent = `$${totalSpentAmount.toFixed(2)}`;
+            document.getElementById('active-orders-count').textContent = activeOrdersCount;
+        }
+
+        function openAddFundModal() {
+            const modal = new bootstrap.Modal(document.getElementById('addFundModal'));
+            modal.show();
+        }
+
+        function addFund() {
+            const amt = parseFloat(document.getElementById('fund-amount').value);
+            if (!amt || amt <= 0) {
+                alert('សូមបញ្ចូលទឹកប្រាក់ឱ្យបានត្រឹមត្រូវ!');
+                return;
+            }
+            balance += amt;
+            localStorage.setItem('long_smm_balance', balance);
+            updateUI();
+            alert(`បានបញ្ចូលទឹកប្រាក់ចំនួន $${amt.toFixed(2)} ជោគជ័យ!`);
+            
+            // បិទ Modal
+            const modalEl = document.getElementById('addFundModal');
+            const modal = bootstrap.Modal.getInstance(modalEl);
+            modal.hide();
+            document.getElementById('fund-amount').value = '';
+        }
 
         function selectPlatform(platform) {
             currentPlatform = platform;
-            
-            // ផ្លាស់ប្តូរ Active Class នៅលើប៊ូតុង
-            document.querySelectorAll('.platform-btn').forEach(btn => {
-                btn.classList.remove('active', 'btn-primary');
-                btn.classList.add('btn-light');
+            document.getElementById('btn-facebook').classList.toggle('active', platform === 'facebook');
+            document.getElementById('btn-tiktok').classList.toggle('active', platform === 'tiktok');
+            loadCategories();
+        }
+
+        function loadCategories() {
+            const categorySelect = document.getElementById('category-select');
+            categorySelect.innerHTML = '';
+            platformData[currentPlatform].categories.forEach(cat => {
+                const opt = document.createElement('option');
+                opt.value = cat.id;
+                opt.textContent = cat.name;
+                categorySelect.appendChild(opt);
             });
-            const selectedBtn = document.querySelector(`[data-platform="${platform}"]`);
-            selectedBtn.classList.remove('btn-light');
-            selectedBtn.classList.add('active', 'btn-primary');
+            loadServices();
+        }
 
-            // ផ្លាស់ប្តូរ Options ក្នុង Category និង Service តាម Platform
-            const catFb = document.getElementById('cat-fb');
-            const catTt = document.getElementById('cat-tt');
+        function loadServices() {
+            const categorySelect = document.getElementById('category-select');
             const serviceSelect = document.getElementById('service-select');
-
-            if (platform === 'facebook') {
-                catFb.style.display = 'block';
-                catTt.style.display = 'none';
-                catFb.selected = true;
-                serviceSelect.innerHTML = '<option value="15">11328 - Facebook - Follower ទំព័រ ឬ ប្រវត្តិរូប</option>';
-            } else {
-                catFb.style.display = 'none';
-                catTt.style.display = 'block';
-                catTt.selected = true;
-                serviceSelect.innerHTML = '<option value="20">20450 - TikTok - Views វីដេអូរហ័ស</option>';
+            serviceSelect.innerHTML = '';
+            
+            const cat = platformData[currentPlatform].categories.find(c => c.id === categorySelect.value);
+            if (cat) {
+                cat.services.forEach(srv => {
+                    const opt = document.createElement('option');
+                    opt.value = srv.id;
+                    opt.setAttribute('data-price', srv.pricePer1k);
+                    opt.textContent = `${srv.name} - $${srv.pricePer1k.toFixed(2)}/1k`;
+                    serviceSelect.appendChild(opt);
+                });
             }
+            calculateTotal();
         }
 
         function calculateTotal() {
-            let qty = document.getElementById('order-qty').value;
-            let pricePerItem = currentPlatform === 'facebook' ? 0.005 : 0.002;
-            let total = qty * pricePerItem;
-            document.getElementById('total-price').innerText = `សរុប: $${total.toFixed(2)}`;
+            const serviceSelect = document.getElementById('service-select');
+            const qtyInput = document.getElementById('order-qty');
+            const selectedOption = serviceSelect.options[serviceSelect.selectedIndex];
+            if (!selectedOption) return;
+
+            const pricePer1k = parseFloat(selectedOption.getAttribute('data-price')) || 0;
+            const qty = parseInt(qtyInput.value) || 0;
+            const total = (qty / 1000) * pricePer1k;
+            document.getElementById('total-price').textContent = `$${total.toFixed(4)}`;
         }
 
         function submitOrder() {
-            let link = document.getElementById('order-link').value;
-            let qty = document.getElementById('order-qty').value;
-
-            if (!link) {
-                alert('សូមបញ្ចូលតំណភ្ជាប់ (Link) ជាមុនសិន!');
-                return;
-            }
-            if (!qty || qty < 10) {
-                alert('សូមបញ្ចូលចំនួនយ៉ាងតិច 10!');
-                return;
-            }
-
-            activeOrders++;
-            document.getElementById('active-orders-count').innerText = activeOrders;
-            alert('ការបញ្ជាទិញរបស់អ្នកបានជោគជ័យ!');
+            const link = document.getElementById('order-link').value.trim();
+            const qty = parseInt(document.getElementById('order-qty').value) || 0;
+            const serviceSelect = document.getElementById('service-select');
+            const selectedOption = serviceSelect.options[serviceSelect.selectedIndex];
             
-            // សម្អាតទម្រង់បញ្ចូល
+            if (!link) {
+                alert('សូមបញ្ចូលតំណភ្ជាប់ (Link)!');
+                return;
+            }
+            if (qty < 100) {
+                alert('ចំនួនបញ្ជាទិញអប្បបរមាគឺ 100!');
+                return;
+            }
+
+            const pricePer1k = parseFloat(selectedOption.getAttribute('data-price')) || 0;
+            const totalCost = (qty / 1000) * pricePer1k;
+
+            if (balance < totalCost) {
+                alert('ទឹកប្រាក់ក្នុងសមតុល្យរបស់អ្នកមិនគ្រាន់ទេ។ សូមបញ្ចូលប្រាក់เพิ่ม (Add Fund)!');
+                return;
+            }
+
+            balance -= totalCost;
+            totalSpentAmount += totalCost;
+            activeOrdersCount++;
+
+            localStorage.setItem('long_smm_balance', balance);
+            updateUI();
+
+            alert('ការបញ្ជាទិញរបស់អ្នកបានជោគជ័យ!');
             document.getElementById('order-link').value = '';
             document.getElementById('order-qty').value = '';
-            document.getElementById('total-price').innerText = 'សរុប: $0.00';
-        }
-
-        function filterServices() {
-            let input = document.getElementById('search-service').value.toLowerCase();
-            // មុខងារស្វែងរកសេវាកម្មអាចបន្ថែមតាមតម្រូវការ
+            calculateTotal();
         }
     </script>
 </body>
