@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> LONG SMM Clone</title>
+    <!--  Bootstrap 5 និង FontAwesome -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { background-color: #f8f9fa; font-family: 'Poppins', sans-serif; }
+        .navbar-brand { color: #0d6efd !important; font-weight: bold; }
+        .card-stat { border: none; border-radius: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+        .btn-platform { border-radius: 8px; font-weight: 500; font-size: 14px; }
+        .form-control, .form-select { border-radius: 8px; }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navbar -->
+    <nav class="navbar navbar-light bg-white px-3 shadow-sm">
+        <div class="d-flex align-items-center">
+            <i class="fa-solid fa-bars fs-4 me-3"></i>
+            <a class="navbar-brand fs-4" href="#">SMM-NOW<span class="text-dark">.com</span></a>
+        </div>
+        <div>
+            <i class="fa-regular fa-moon fs-5 me-3"></i>
+            <span class="badge bg-primary rounded-pill p-2"><i class="fa-solid fa-user"></i></span>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container py-3">
+
+        <!-- User Stats Row 1 -->
+        <div class="row g-2 mb-2">
+            <div class="col-6">
+                <div class="card card-stat p-3 bg-white">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-primary text-white p-2 rounded-3 me-2"><i class="fa-solid fa-user"></i></div>
+                        <div>
+                            <h6 class="mb-0 fw-bold">lysavelong5</h6>
+                            <small class="text-muted">Username</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card card-stat p-3 bg-white">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-primary text-white p-2 rounded-3 me-2"><i class="fa-solid fa-wallet"></i></div>
+                        <div>
+                            <h6 class="mb-0 fw-bold">$0</h6>
+                            <small class="text-muted">Balance</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- User Stats Row 2 -->
+        <div class="row g-2 mb-3">
+            <div class="col-6">
+                <div class="card card-stat p-3 bg-white">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-primary text-white p-2 rounded-3 me-2"><i class="fa-solid fa-chart-line"></i></div>
+                        <div>
+                            <h6 class="mb-0 fw-bold">$0</h6>
+                            <small class="text-muted">Total Spend</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card card-stat p-3 bg-white">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-primary text-white p-2 rounded-3 me-2"><i class="fa-solid fa-box"></i></div>
+                        <div>
+                            <h6 class="mb-0 fw-bold">0</h6>
+                            <small class="text-muted">Active Orders</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Social Media Buttons -->
+        <div class="row g-2 mb-3">
+            <div class="col-6"><button class="btn btn-light w-100 btn-platform shadow-sm py-2"><i class="fa-brands fa-tiktok"></i> TikTok</button></div>
+            <div class="col-6"><button class="btn btn-light w-100 btn-platform shadow-sm py-2"><i class="fa-brands fa-facebook text-primary"></i> Facebook</button></div>
+            <div class="col-6"><button class="btn btn-light w-100 btn-platform shadow-sm py-2"><i class="fa-solid fa-tower-broadcast text-danger"></i> Facebook Live</button></div>
+            <div class="col-6"><button class="btn btn-light w-100 btn-platform shadow-sm py-2"><i class="fa-brands fa-youtube text-danger"></i> YouTube</button></div>
+            <div class="col-6"><button class="btn btn-light w-100 btn-platform shadow-sm py-2"><i class="fa-brands fa-telegram text-info"></i> Telegram</button></div>
+            <div class="col-6"><button class="btn btn-light w-100 btn-platform shadow-sm py-2"><i class="fa-brands fa-instagram text-danger"></i> Instagram</button></div>
+        </div>
+
+        <!-- Order Tabs -->
+        <div class="row g-2 mb-3">
+            <div class="col-6"><button class="btn btn-primary w-100 btn-platform"><i class="fa-solid fa-cart-shopping"></i> New Order</button></div>
+            <div class="col-6"><button class="btn btn-light w-100 btn-platform border"><i class="fa-solid fa-heart text-danger"></i> Favorite</button></div>
+        </div>
+
+        <!-- Order Form Card -->
+        <div class="card border-0 shadow-sm p-3 rounded-4">
+            <!-- Search -->
+            <div class="mb-3">
+                <div class="input-group">
+                    <span class="input-group-text bg-light border-end-0"><i class="fa-solid fa-magnifying-glass text-muted"></i></span>
+                    <input type="text" class="form-control bg-light border-start-0" placeholder="Search">
+                </div>
+            </div>
+
+            <!-- Category -->
+            <div class="mb-3">
+                <label class="form-label fw-bold small"><i class="fa-solid fa-table-cells text-primary"></i> Category</label>
+                <select class="form-select bg-light">
+                    <option>Facebook - Followers [ Real Account - Fast S...</option>
+                </select>
+            </div>
+
+            <!-- Service -->
+            <div class="mb-3">
+                <label class="form-label fw-bold small"><i class="fa-solid fa-bell-concierge text-primary"></i> Service</label>
+                <select class="form-select bg-light">
+                    <option><span class="badge bg-warning text-dark">11328</span> - Facebook - All Type Profile/Page Followe...</option>
+                </select>
+            </div>
+
+            <!-- Link -->
+            <div class="mb-3">
+                <label class="form-label fw-bold small"><i class="fa-solid fa-link text-primary"></i> Link</label>
+                <input type="text" class="form-control bg-light" placeholder="https://...">
+            </div>
+
+            <!-- Quantity -->
+            <div class="mb-2">
+                <label class="form-label fw-bold small"><i class="fa-solid fa-arrow-up-wide-short text-primary"></i> Quantity</label>
+                <div class="position-relative">
+                    <input type="number" class="form-control bg-light pe-5" placeholder="">
+                    <button class="btn btn-primary position-absolute top-50 end-0 translate-middle-y me-1 rounded-circle" style="width: 35px; height: 35px;"><i class="fa-solid fa-paper-plane fs-6"></i></button>
+                </div>
+                <small class="text-muted mt-1 d-block">Min: 10 - Max: 1 000 000</small>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
