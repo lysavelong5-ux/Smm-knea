@@ -13,19 +13,10 @@
         .btn-platform { border-radius: 8px; font-weight: 500; font-size: 14px; transition: all 0.2s; }
         .btn-platform.active { background-color: #0d6efd; color: white !important; border-color: #0d6efd; }
         .btn-platform.active i { color: white !important; }
-        .form-control, .form-select { border-radius: 8px; }
+        .form-control, .form-select { border-radius: 8px; padding: 10px 15px; }
         .auth-container { max-width: 400px; margin: 50px auto; }
         .offcanvas-body .nav-link { color: #333; font-weight: 500; padding: 10px 15px; border-radius: 8px; margin-bottom: 5px; }
         .offcanvas-body .nav-link:hover, .offcanvas-body .nav-link.active { background-color: #f0f2f5; color: #0d6efd; }
-        
-        /* ញាក់/រត់ចុះឡើងសម្រាប់រូប Telegram */
-        @keyframes bounceUpDown {
-            0%, 100% { transform: translateY(-50%) translateY(0); }
-            50% { transform: translateY(-50%) translateY(-6px); }
-        }
-        .animated-telegram {
-            animation: bounceUpDown 1.2s infinite ease-in-out;
-        }
     </style>
 </head>
 <body>
@@ -51,7 +42,7 @@
                 <input type="password" id="auth-password" class="form-control bg-light" placeholder="******">
             </div>
 
-            <button id="auth-btn" class="btn btn-primary w-100 py-2 mb-3 fw-bold" onclick="handleAuth()">ចូលគណនី (Login)</button>
+            <button id="auth-btn" class="btn btn-primary w-100 py-2 mb-3 fw-bold shadow-sm" onclick="handleAuth()">ចូលគណនី (Login)</button>
             
             <div class="text-center">
                 <small class="text-muted" id="auth-toggle-text">គ្មានគណនីមែនទេ? <a href="#" onclick="toggleAuthMode(event)" class="text-decoration-none fw-bold">បង្កើតគណនី</a></small>
@@ -164,44 +155,47 @@
 
             <!-- Action Tabs -->
             <div class="row g-2 mb-3">
-                <div class="col-6"><button class="btn btn-primary w-100 btn-platform"><i class="fa-solid fa-cart-shopping me-1"></i> បញ្ជាទិញថ្មី</button></div>
-                <div class="col-6"><button class="btn btn-light w-100 btn-platform border" onclick="openAddFundModal()"><i class="fa-solid fa-wallet text-success me-1"></i> បញ្ចូលប្រាក់</button></div>
+                <div class="col-6"><button class="btn btn-primary w-100 btn-platform shadow-sm"><i class="fa-solid fa-cart-shopping me-1"></i> បញ្ជាទិញថ្មី</button></div>
+                <div class="col-6"><button class="btn btn-light w-100 btn-platform border shadow-sm" onclick="openAddFundModal()"><i class="fa-solid fa-wallet text-success me-1"></i> បញ្ចូលប្រាក់</button></div>
             </div>
 
-            <!-- Order Form Card -->
-            <div class="card border-0 shadow-sm p-3 rounded-4 bg-white">
+            <!-- Order Form Card (ស្អាត និងច្បាស់លាស់) -->
+            <div class="card border-0 shadow-sm p-4 rounded-4 bg-white">
+                <h5 class="fw-bold mb-3 text-primary"><i class="fa-solid fa-cart-plus me-2"></i>បង្កើតការបញ្ជាទិញ</h5>
+                
                 <div class="mb-3">
-                    <label class="form-label fw-bold small"><i class="fa-solid fa-table-cells text-primary me-1"></i> ប្រភេទសេវាកម្ម (Category)</label>
-                    <select class="form-select bg-light" id="category-select" onchange="loadServices()"></select>
+                    <label class="form-label fw-bold small text-secondary">ប្រភេទសេវាកម្ម (Category)</label>
+                    <select class="form-select bg-light border-0 shadow-sm" id="category-select" onchange="loadServices()"></select>
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label fw-bold small"><i class="fa-solid fa-bell-concierge text-primary me-1"></i> សេវាកម្ម (Service)</label>
-                    <select class="form-select bg-light" id="service-select" onchange="calculateTotal()"></select>
+                    <label class="form-label fw-bold small text-secondary">សេវាកម្ម (Service)</label>
+                    <select class="form-select bg-light border-0 shadow-sm" id="service-select" onchange="calculateTotal()"></select>
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label fw-bold small"><i class="fa-solid fa-link text-primary me-1"></i> តំណភ្ជាប់ (Link)</label>
-                    <input type="text" id="order-link" class="form-control bg-light" placeholder="https://...">
+                    <label class="form-label fw-bold small text-secondary">តំណភ្ជាប់ (Link)</label>
+                    <input type="text" id="order-link" class="form-control bg-light border-0 shadow-sm" placeholder="https://...">
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label fw-bold small"><i class="fa-solid fa-arrow-up-wide-short text-primary me-1"></i> ចំនួន (Quantity)</label>
-                    <div class="position-relative">
-                        <input type="number" id="order-qty" class="form-control bg-light pe-5" placeholder="1000" oninput="calculateTotal()">
-                        <!-- រូប Telegram រត់ចុះឡើង -->
-                        <span class="position-absolute top-50 end-0 translate-middle-y me-3 text-info animated-telegram fs-5">
-                            <i class="fa-brands fa-telegram"></i>
-                        </span>
-                    </div>
-                    <small class="text-muted mt-1 d-block">អប្បបរមា: 100 - អតិបរមា: 1,000,000 | ទំនាក់ទំនង: <b>@Neakkrobkrong</b></small>
+                    <label class="form-label fw-bold small text-secondary">ចំនួន (Quantity)</label>
+                    <input type="number" id="order-qty" class="form-control bg-light border-0 shadow-sm" placeholder="1000" oninput="calculateTotal()">
+                    <small class="text-muted mt-1 d-block">អប្បបរមា: 100 - អតិបរមា: 1,000,000</small>
                 </div>
                 
-                <div class="mt-2 p-2 bg-light rounded d-flex justify-content-between align-items-center">
-                    <span class="text-muted small">តម្លៃសរុب: <strong class="text-primary fs-5" id="total-price">$0.00</strong></span>
-                    <div>
-                        <button class="btn btn-outline-primary btn-sm fw-bold px-3" onclick="submitOrder()">ទិញឥឡូវនេះ</button>
-                        <button class="btn btn-primary btn-sm fw-bold px-3 ms-1" onclick="submitOrder()"><i class="fa-solid fa-paper-plane"></i> បញ្ជាទិញ</button>
+                <!-- ផ្នែកតម្លៃ និងប៊ូតុងបញ្ជាទិញច្បាស់លាស់ -->
+                <div class="bg-light p-3 rounded-3 mb-3 d-flex justify-content-between align-items-center shadow-sm">
+                    <span class="text-secondary small fw-bold">តម្លៃសរុប (Total):</span>
+                    <span class="fw-bold text-primary fs-4" id="total-price">$0.00</span>
+                </div>
+
+                <div class="row g-2">
+                    <div class="col-6">
+                        <button class="btn btn-outline-primary w-100 fw-bold py-2 shadow-sm" onclick="submitOrder()">ទិញឥឡូវនេះ</button>
+                    </div>
+                    <div class="col-6">
+                        <button class="btn btn-primary w-100 fw-bold py-2 shadow-sm" onclick="submitOrder()"><i class="fa-solid fa-paper-plane me-1"></i> បញ្ជាទិញ</button>
                     </div>
                 </div>
             </div>
@@ -211,24 +205,24 @@
     <!-- Modal បញ្ចូលប្រាក់ (Add Fund Modal) -->
     <div class="modal fade" id="addFundModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content rounded-4 border-0 p-3">
-                <div class="modal-header border-0">
-                    <h5 class="modal-title fw-bold"><i class="fa-solid fa-wallet text-success"></i> បញ្ចូលទឹកប្រាក់ (Add Fund)</h5>
+            <div class="modal-content rounded-4 border-0 p-4 shadow">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="modal-title fw-bold text-success"><i class="fa-solid fa-wallet me-2"></i> បញ្ចូលទឹកប្រាក់ (Add Fund)</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label class="form-label small fw-bold">ជ្រើសរើសធនាគារ</label>
-                        <select class="form-select bg-light" id="bank-select">
+                        <label class="form-label small fw-bold text-secondary">ជ្រើសរើសធនាគារ</label>
+                        <select class="form-select bg-light border-0 shadow-sm" id="bank-select">
                             <option>ABA Bank - 000 111 222 (LONG SMM)</option>
                             <option>ACLEDA Bank - 333 444 555 (LONG SMM)</option>
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label small fw-bold">ទឹកប្រាក់ចង់បញ្ចូល ($)</label>
-                        <input type="number" id="fund-amount" class="form-control bg-light" placeholder="10">
+                        <label class="form-label small fw-bold text-secondary">ទឹកប្រាក់ចង់បញ្ចូល ($)</label>
+                        <input type="number" id="fund-amount" class="form-control bg-light border-0 shadow-sm" placeholder="10">
                     </div>
-                    <button class="btn btn-success w-100 fw-bold py-2" onclick="addFund()">បញ្ជាក់ការបញ្ចូលប្រាក់</button>
+                    <button class="btn btn-success w-100 fw-bold py-2 shadow-sm" onclick="addFund()">បញ្ជាក់ការបញ្ចូលប្រាក់</button>
                 </div>
             </div>
         </div>
