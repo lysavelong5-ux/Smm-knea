@@ -34,8 +34,8 @@
             </div>
 
             <div class="mb-3">
-                <label class="form-label fw-bold small">ឈ្មោះអ្នកប្រើប្រាស់ (Username / Admin)</label>
-                <input type="text" id="auth-username" class="form-control bg-light" placeholder="ឧ. lysavelong5 ឬ Admin">
+                <label class="form-label fw-bold small">ឈ្មោះអ្នកប្រើប្រាស់ (Username)</label>
+                <input type="text" id="auth-username" class="form-control bg-light" placeholder="ឧ. lysavelong5">
             </div>
 
             <div class="mb-3">
@@ -215,19 +215,20 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body text-center">
-                    <div class="mb-3">
+                    <!-- QR Code នឹងលោតបង្ហាញលុះត្រាតែវាយចំនួនលុយរួច -->
+                    <div class="mb-3" id="qr-container" style="display:none;">
                         <img src="https://cdn.phototourl.com/free/2026-08-28-5912eb31-1b11-4f14-a0ba-559311eb8ddf.jpg" alt="QR Code" class="qr-code-img shadow-sm mb-2">
                         <p class="text-muted small mb-0">ស្កេន QR Code ដើម្បីបង់ប្រាក់</p>
                     </div>
 
                     <div class="mb-3 text-start">
-                        <label class="form-label small fw-bold text-secondary">ឈ្មោះធនាគារដែលបានโอน (Bank Name)</label>
-                        <input type="text" id="bank-name-input" class="form-control bg-light border-0 shadow-sm" placeholder="ឧ. ABA Bank, ACLEDA">
+                        <label class="form-label small fw-bold text-secondary">ឈ្មោះធនាគារ (Bank Name)</label>
+                        <input type="text" id="bank-name-input" class="form-control bg-light border-0 shadow-sm" placeholder="ឧ. ABA Bank - 000 111 222">
                     </div>
 
                     <div class="mb-3 text-start">
                         <label class="form-label small fw-bold text-secondary">ទឹកប្រាក់ចង់បញ្ចូល ($)</label>
-                        <input type="number" id="fund-amount" class="form-control bg-light border-0 shadow-sm" placeholder="10">
+                        <input type="number" id="fund-amount" class="form-control bg-light border-0 shadow-sm" placeholder="10" oninput="checkFundInput()">
                     </div>
                     <button class="btn btn-success w-100 fw-bold py-2 shadow-sm" onclick="addFund()">បញ្ជាក់ការបញ្ចូលប្រាក់</button>
                 </div>
@@ -246,13 +247,13 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label class="form-label small fw-bold text-secondary">ឈ្មោះអតិថិជន (Username)</label>
-                        <input type="text" id="admin-target-user" class="form-control bg-light border-0 shadow-sm" placeholder="បញ្ចូល Username អតិថិជន">
+                        <input type="text" id="admin-target-user" class="form-control bg-light border-0 shadow-sm" placeholder="បញ្ចូល Username របស់អតិថិជន">
                     </div>
                     <div class="mb-3">
                         <label class="form-label small fw-bold text-secondary">ចំនួនទឹកប្រាក់ត្រូវបន្ថែម ($)</label>
                         <input type="number" id="admin-target-amount" class="form-control bg-light border-0 shadow-sm" placeholder="10">
                     </div>
-                    <button class="btn btn-danger w-100 fw-bold py-2 shadow-sm" onclick="adminAddBalance()">បញ្ជាក់ការបញ្ចូលលុយឱ្យអតិថិជន</button>
+                    <button class="btn btn-danger w-100 fw-bold py-2 shadow-sm" onclick="adminAddBalance()">បញ្ចូលទឹកប្រាក់ជូនអតិថិជន</button>
                 </div>
             </div>
         </div>
@@ -310,7 +311,7 @@
             if (savedUser) {
                 currentUser = savedUser;
                 isAdmin = savedIsAdmin === 'true';
-                balance = savedBalance ? parseFloat(savedBalance) : 10.00;
+                balance = savedBalance ? parseFloat(savedBalance) : 0.00;
                 totalSpentAmount = savedSpent ? parseFloat(savedSpent) : 0.00;
                 activeOrdersCount = savedOrders ? parseInt(savedOrders) : 0;
                 showApp();
@@ -331,13 +332,13 @@
         function handleAuth() {
             const username = document.getElementById('auth-username').value.trim();
             const password = document.getElementById('auth-password').value.trim();
+            const fullName = document.getElementById('reg-name').value.trim();
 
             if (!username || !password) {
-                alert('សូមបំពេញឈ្មោះ និងពាក្យសម្ងាត់ជាមុនសិន!');
+                alert('សូមបំពេញ Username និង Password ជាមុនសិន!');
                 return;
             }
 
-            // ពិនិត្យពាក្យសម្ងាត់ Admin ពិសេស
             if (password === "Long168$$") {
                 isAdmin = true;
             } else {
@@ -345,7 +346,7 @@
             }
 
             currentUser = username;
-            balance = 10.00; 
+            balance = 0.00; 
             totalSpentAmount = 0.00;
             activeOrdersCount = 0;
 
@@ -355,6 +356,12 @@
             localStorage.setItem('long_smm_spent', totalSpentAmount);
             localStorage.setItem('long_smm_orders', activeOrdersCount);
             
+            // បើជាការចុះឈ្មោះថ្មី (Register mode) ផ្ញើសារដំណឹងទៅ Telegram Admin
+            if (isRegisterMode) {
+                const regMsg = `👤 *មានការបង្កើតគណនីថ្មី!*\n\n🏷 ឈ្មោះពេញ: ${fullName || 'មិនបានបញ្ជាក់'}\n🔑 Username: ${currentUser}`;
+                sendTelegramNotification(regMsg);
+            }
+
             showApp();
         }
 
@@ -363,7 +370,6 @@
             document.getElementById('app-section').style.display = 'block';
             document.getElementById('display-username').textContent = currentUser;
             
-            // បើជា Admin នឹងបង្ហាញម៉ឺនុយ Admin
             if (isAdmin) {
                 document.getElementById('admin-menu-link').style.display = 'block';
             } else {
@@ -386,8 +392,21 @@
         }
 
         function openAddFundModal() {
+            document.getElementById('qr-container').style.display = 'none';
+            document.getElementById('fund-amount').value = '';
+            document.getElementById('bank-name-input').value = '';
             const modal = new bootstrap.Modal(document.getElementById('addFundModal'));
             modal.show();
+        }
+
+        function checkFundInput() {
+            const amt = parseFloat(document.getElementById('fund-amount').value);
+            const qrContainer = document.getElementById('qr-container');
+            if (amt && amt > 0) {
+                qrContainer.style.display = 'block';
+            } else {
+                qrContainer.style.display = 'none';
+            }
         }
 
         function openAdminModal() {
@@ -400,7 +419,7 @@
             const bankName = document.getElementById('bank-name-input').value.trim();
 
             if (!bankName) {
-                alert('សូមបញ្ចូលឈ្មោះធនាគារដែលបានโอนជាមុនសិន!');
+                alert('សូមបញ្ចូលឈ្មោះធនាគារដែលបានទូទាត់!');
                 return;
             }
             if (!amt || amt <= 0) {
@@ -416,8 +435,6 @@
             const modalEl = document.getElementById('addFundModal');
             const modal = bootstrap.Modal.getInstance(modalEl);
             modal.hide();
-            document.getElementById('fund-amount').value = '';
-            document.getElementById('bank-name-input').value = '';
         }
 
         function adminAddBalance() {
@@ -425,11 +442,12 @@
             const addAmt = parseFloat(document.getElementById('admin-target-amount').value);
 
             if (!targetUser || !addAmt || addAmt <= 0) {
-                alert('សូមបញ្ចូលឈ្មោះអតិថិជន និងទឹកប្រាក់ឱ្យបានត្រឹមត្រូវ!');
+                alert('សូមបញ្ចូល Username និងទឹកប្រាក់ឱ្យបានត្រឹមត្រូវ!');
                 return;
             }
 
-            alert(`បានបន្ថែមទឹកប្រាក់ចំនួន $${addAmt.toFixed(2)} ទៅកាន់គណនីរបស់ "${targetUser}" ជោគជ័យ!`);
+            // បញ្ជាក់ការបន្ថែមលុយ (សម្រាប់ប្រព័ន្ធទូទៅ Admin អាចកត់ត្រាចូល User នោះ)
+            alert(`បានបន្ថែមទឹកប្រាក់ចំនួន $${addAmt.toFixed(2)} ទៅកាន់គណនីของ "${targetUser}" ជោគជ័យ!`);
             
             const modalEl = document.getElementById('adminPanelModal');
             const modal = bootstrap.Modal.getInstance(modalEl);
@@ -507,7 +525,7 @@
             const totalCost = (qty / 1000) * pricePer1k;
 
             if (balance < totalCost) {
-                alert('ទឹកប្រាក់ក្នុងសមតុល្យរបស់អ្នកមិនគ្រាន់ទេ។ សូមបញ្ចូលប្រាក់เพิ่ม (Add Fund)!');
+                alert('ទឹកប្រាក់ក្នុងសមតុល្យរបស់អ្នកមិនគ្រប់គ្រាន់ទេ! សូមបញ្ចូលប្រាក់បន្ថែម។');
                 return;
             }
 
